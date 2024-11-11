@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>assigment 4 javascript</title>
+</head>
+<body>
+    <h3>Leap Year Checker</h3>
+        <label for="year">Enter a year:</label>
+        <input type="number" id="year" name="year" required>
+        <button type="submit"  onclick="checkLeapYear(event)">Check leap year</button>
+    </form>
+    <p id="leapresult1"></p>
+    <br>
+    <br>
+   
+
+    <h3>1st January Sunday Checker</h3> 
+     
+    <button type="submit" onclick="checkSundays(event)">Check Sundays</button> </form> 
+    <p id="result1"></p>
+    
+    <br>
+    <br>
+
+    <h3>Odd or Even Checker</h3>
+    
+        <button type="submit" onclick="checkOddEven(event)">Check Numbers</button>
+    </form>
+    <p id="oddevenresult2"></p>
+
+    <br>
+    <br>
+
+    <h3>Palindrome Checker</h3>
+
+        <label for="inputString">Enter a string:</label>
+        <input type="text" id="inputString" name="inputString" required>
+        <button type="submit" onclick="checkPalindrome(event)">Check</button>
+    </form>
+    <p id="palindromeresult3"></p>
+
+    <script>
+        function checkLeapYear(event) {
+            event.preventDefault();
+            const year = parseInt(document.getElementById("year").value);
+            let isLeap = false;
+
+            // Using a for loop (although it runs once for the purpose of this example)
+            for (let i = 0; i < 1; i++) {
+                if (year % 4 === 0) {
+                    if (year % 100 === 0) {
+                        if (year % 400 === 0) {
+                            isLeap = true;
+                        }
+                    } else {
+                        isLeap = true;
+                    }
+                }
+            }
+
+            const resultText = isLeap ? `${year} is a leap year.` : `${year} is not a leap year.`;
+            document.getElementById("leapresult1").innerText = resultText;
+        }
+        
+        function checkSundays(event) {
+            event.preventDefault();
+            let resultText = 'Years when 1st January is a Sunday between 2014 and 2050: <br>';
+            for (let year = 2014; year <= 2050; year++) {
+                const date = new Date(year, 0, 1); // January is 0
+                if (date.getDay() === 0) { // 0 means Sunday
+                    resultText += year + '<br>';
+                }
+            }
+            document.getElementById("result1").innerHTML = resultText;
+        }
+
+
+        function checkOddEven(event) {
+            event.preventDefault();
+            let resultText = '';
+            for (let i = 0; i <= 15; i++) {
+                if (i % 2 === 0) {
+                    resultText += `${i} is even.<br>`;
+                } else {
+                    resultText += `${i} is odd.<br>`;
+                }
+            }
+            document.getElementById("oddevenresult2").innerHTML = resultText;
+        }
+
+        function checkPalindrome(event) {
+            event.preventDefault();
+            const str = document.getElementById("inputString").value;
+            const len = str.length;
+            let isPalindrome = true;
+
+            // Loop to check palindrome
+            for (let i = 0; i < len / 2; i++) {
+                if (str[i] !== str[len - 1 - i]) {
+                    isPalindrome = false;
+                    break;
+                }
+            }
+
+            const resultText = isPalindrome ? `"${str}" is a palindrome.` : `"${str}" is not a palindrome.`;
+            document.getElementById("palindromeresult3").innerText = resultText;
+        }
+     
+
+        
+    </script>
+</body>
+</html>
